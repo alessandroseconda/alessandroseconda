@@ -1,0 +1,21 @@
+name: paperino container
+on:
+  workflow_dispatch:
+    inputs:
+      accounts_ondemand:
+        description: 'Enter the accounts, separated by commas'
+  schedule:
+    - cron: "30 9,12 * * *" #Runs at 8:30 and 11:30 UTC everyday
+
+jobs:
+  # define matrix for all executions
+  # ------------------------
+  DefineMatrix:
+    runs-on: ubuntu-latest
+    outputs:
+      accounts: ${{ steps.get-accounts.outputs.IDs }}
+    steps:
+    - name: Get Accounts
+      id: get-accounts
+      env:
+        accounts_ond
